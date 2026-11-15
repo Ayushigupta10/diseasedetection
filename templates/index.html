@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f8f2">
+  <title>SAgriVision | Plant health scan</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}?v=4">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/" aria-label="SAgriVision home"><span class="brand-mark">S</span><span>SAgri<span class="brand-light">Vision</span></span></a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a id="nav-how" href="#how-it-works">How it works</a>
+      <a id="nav-scan" href="#scanner">Disease scan</a>
+    </nav>
+    <div class="header-tools">
+      <span class="tag" id="brand-tag">AI PLANT HEALTH</span>
+      <button class="button secondary language-toggle" id="language-toggle" type="button">हिन्दी</button>
+    </div>
+  </header>
+
+  <main>
+    {% if not models_ready %}<div class="notice" id="model-notice">Models have not been trained yet. Follow the steps in <code>README.md</code> to prepare them.</div>{% endif %}
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow" id="hero-eyebrow"><span class="live-dot"></span> SMARTER CROP CARE</p>
+        <h1 id="hero-title">Know what your<br><em>leaf is telling you.</em></h1>
+        <p class="intro" id="hero-intro">A quick image check to help identify crop and leaf disease patterns.</p>
+        <a class="hero-cta" id="hero-cta" href="#scanner">Start a leaf scan <span>↓</span></a>
+        <div class="trust-note" id="trust-note"><span class="trust-icon">✓</span> Fast image analysis <span class="trust-separator">·</span> English & Hindi</div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+        <div class="visual-sun"></div><div class="plant-emoji">🌿</div>
+        <div class="visual-chip chip-top"><span>✦</span> Plant health insights</div>
+        <div class="visual-chip chip-bottom"><span class="chip-leaf">●</span> Leaf-first analysis</div>
+      </div>
+    </section>
+
+    <section class="steps" id="how-it-works" aria-label="How it works">
+      <article class="step-item"><span class="step-number">01</span><div><strong id="step-one-title">Add a photo</strong><p id="step-one-body">Upload a leaf image or use your camera.</p></div></article>
+      <span class="step-line"></span>
+      <article class="step-item"><span class="step-number">02</span><div><strong id="step-two-title">Check the leaf</strong><p id="step-two-body">We check leaf, crop and disease confidence.</p></div></article>
+      <span class="step-line"></span>
+      <article class="step-item"><span class="step-number">03</span><div><strong id="step-three-title">View insights</strong><p id="step-three-body">Unclear images stay marked uncertain.</p></div></article>
+    </section>
+
+    <section class="scanner-layout" id="scanner">
+      <div class="scanner-intro">
+        <p class="eyebrow" id="step-label">STEP 01 · ADD A PHOTO</p>
+        <h2 id="upload-title">Upload a Leaf Image</h2>
+        <p class="scanner-copy" id="scanner-copy">For the clearest result, photograph one leaf in good light and keep it in focus.</p>
+        <div class="supported"><span>✓</span> JPG, PNG, WEBP <i></i> Up to 8 MB</div>
+      </div>
+
+      <section class="card upload-card" aria-label="Leaf image scanner">
+        <div class="section-head">
+          <div><p class="eyebrow" id="image-eyebrow">YOUR IMAGE</p><h3 id="image-title">Start with a clear leaf photo</h3></div>
+          <span class="step">1 / 2</span>
+        </div>
+        <div class="drop" id="drop">
+          <div id="empty">
+            <div class="upload-icon"><span>↑</span></div>
+            <strong id="choose-label">Choose a leaf image to get started</strong>
+            <p id="formats-label">JPG, JPEG, PNG or WEBP · up to 8 MB</p>
+            <div class="actions">
+              <label class="button secondary" id="upload-button">Upload Image<input id="file" type="file" accept="image/jpeg,image/png,image/webp"></label>
+              <span class="or-label">or</span>
+              <button class="button camera-button" id="camera" type="button"><span>◎</span> Open Camera</button>
+            </div>
+          </div>
+          <div id="selected" class="selected hidden">
+            <img id="preview" alt="Selected leaf">
+            <div class="file-meta"><strong id="filename"></strong><span id="filesize"></span></div>
+            <div class="actions selected-actions">
+              <label class="link">Change Image<input id="change" type="file" accept="image/jpeg,image/png,image/webp"></label>
+              <button class="link" id="retake" type="button">Retake photo</button>
+              <button class="link danger" id="remove" type="button">Remove</button>
+            </div>
+          </div>
+        </div>
+        <video id="video" class="hidden" autoplay playsinline></video>
+        <div id="capture-actions" class="actions hidden"><button class="button secondary" id="capture" type="button">Capture leaf</button><button class="link" id="cancel-camera" type="button">Cancel</button></div>
+        <button id="analyze" class="button primary" disabled>Analyze Leaf <span>→</span></button>
+        <p class="footnote" id="footnote">Results are model predictions, not a guarantee of diagnostic accuracy.</p>
+        <div class="privacy-note" id="privacy-note"><span>◈</span> Your photo is used only for this scan.</div>
+      </section>
+    </section>
+
+    <section id="result" class="card result-card hidden" aria-live="polite"></section>
+    <section class="bottom-note"><span class="note-icon">i</span><p><strong id="caution-title">A helpful starting point, not a final diagnosis.</strong><br><span id="caution-copy">For crop treatment decisions, confirm symptoms with a local agricultural expert.</span></p></section>
+    <footer id="footer-text">Made for thoughtful growing <span>·</span> SAgriVision</footer>
+  </main>
+  <script src="{{ url_for('static',filename='app.js') }}?v=4"></script>
+</body>
+</html>
+

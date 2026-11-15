@@ -1,0 +1,32 @@
+
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+
+# Original datasets
+/bananadisease/
+/corndisease/
+/mangodisease/
+/millet disease/
+/non-leaf data/
+/Pomegranate Diseases/
+/rice_leaf_diseases/
+/soyabeandisease/
+/sugarcane disease/
+/tomatodisease/
+
+# Temporary files
+*.log
+.DS_Store
+Thumbs.db
+
+# Uploaded images
+/static/uploads/*
+
+# Best training checkpoints (keep final models)
+models/*.best.keras
