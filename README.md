@@ -1,4 +1,4 @@
-# LeafLens
+# SAgriVision – Plant Disease Detection
 
 This updates the existing Flask application. It preserves the crop datasets and streams image batches from the ten named dataset folders; it does not scan `.venv`, `models`, or other project files as training data.
 
